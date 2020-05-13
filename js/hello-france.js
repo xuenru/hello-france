@@ -30,7 +30,6 @@ d3.tsv('data/france.tsv', (d, i) => {
     }
     dataset = rows;
     draw();
-    // drawBar();
 });
 
 
@@ -50,7 +49,7 @@ function draw() {
         .domain(d3.extent(dataset, (row) => row.population))
         .range([0, 100]);
 
-    let scale_color = d3.interpolate('gray', 'red');
+    let scale_color = d3.interpolate("lightblue", "blue");
 
     // plot the points
     svg.selectAll('rect')
@@ -136,56 +135,5 @@ function handleMouseOut() {
     tooltip.transition()
         .duration(200)
         .style("opacity", 0);
-}
-
-
-function drawBar() {
-    //Create SVG element
-    let svg_chart = d3.select("body")
-        .append("svg")
-        .attr('class', 'chart')
-        .attr('width', w)
-        .attr('height', h);
-
-    // Create bars
-    let bar = svg_chart.selectAll("g")
-        .data(dataset)
-        .enter()
-        .append("g")
-        .attr("transform", function (d, i) {
-            return "translate(10,10)";
-        });
-
-// Create rectangles of the correct width
-    bar.append("rect")
-        .attr("fill", 'blue')
-        .attr("class", "bar")
-        .attr("width", (d) => d.population)
-        .attr("height", 10);
-
-// Add text label in bar
-    bar.append("text")
-        .attr("x", function (d) {
-            return 0;
-        })
-        .attr("y", 0)
-        .attr("fill", "red")
-        .attr("dy", ".35em")
-        .text(function (d) {
-            return d.population;
-        });
-
-// Draw labels
-    bar.append("text")
-        .attr("class", "label")
-        .attr("x", function (d) {
-            return -10;
-        })
-        .attr("y", 0)
-        .attr("dy", ".35em")
-        .text(function (d, i) {
-            return d.place
-        });
-
 }
 
