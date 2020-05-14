@@ -64,7 +64,7 @@ function draw() {
         .attr('cx', (d) => Number.isNaN(d.longitude) ? null : x(d.longitude))
         .attr('cy', (d) => Number.isNaN(d.latitude) ? null : y(d.latitude))
         .attr("r", (d) => scale_pop(d.population))
-        .attr('fill', (d) => scale_color(scale_des(d.population)))
+        .attr('fill', (d) => scale_color(scale_des(d.density)))
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut)
     ;

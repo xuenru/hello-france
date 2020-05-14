@@ -2,7 +2,7 @@ div.tooltip {
     position: absolute;
     padding: 10px;
     background: lightsteelblue;
-    border-radius: 8px;
+    border-radius: .25rem;
     pointer-events: none;
 }
 
@@ -13,6 +13,7 @@ div.tooltip {
     padding: 5px;
     color: white;
     cursor: pointer;
+    border-radius: .25rem;
 }
 
 .map circle {
