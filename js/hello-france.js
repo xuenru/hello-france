@@ -110,6 +110,13 @@ function draw() {
         .on("zoom", zoomed);
     let callZoom = svg.call(zoom);
 
+    d3.select("body")
+        .append("input")
+        .attr('id', 'reset-zoom')
+        .attr('value', 'Reset zoom')
+        .attr('type', 'button')
+    ;
+
     d3.select("#reset-zoom")
         .on('click', function () {
             callZoom.transition()

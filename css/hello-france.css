@@ -12,6 +12,7 @@ div.tooltip {
     font-weight: bold;
     padding: 5px;
     color: white;
+    cursor: pointer;
 }
 
 .map circle {
