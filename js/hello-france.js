@@ -47,20 +47,24 @@ function draw() {
     //scale population
     let scale_pop = d3.scaleLinear()
         .domain(d3.extent(dataset, (row) => row.population))
-        .range([0, 100]);
+        .range([1, 30]);
 
-    let scale_color = d3.interpolate("lightblue", "blue");
+    //scale density
+    let scale_des = d3.scaleLinear()
+        .domain(d3.extent(dataset, (row) => row.density))
+        .range([0, 20]);
+
+    let scale_color = d3.interpolate("lightblue", "red");
 
     // plot the points
-    svg.selectAll('rect')
+    svg.selectAll('circle')
         .data(dataset)
         .enter()
-        .append('rect')
-        .attr('width', 1)
-        .attr('height', 1)
-        .attr('x', (d) => Number.isNaN(d.longitude) ? null : x(d.longitude))
-        .attr('y', (d) => Number.isNaN(d.latitude) ? null : y(d.latitude))
-        .attr('fill', (d) => scale_color(scale_pop(d.population)))
+        .append('circle')
+        .attr('cx', (d) => Number.isNaN(d.longitude) ? null : x(d.longitude))
+        .attr('cy', (d) => Number.isNaN(d.latitude) ? null : y(d.latitude))
+        .attr("r", (d) => scale_pop(d.population))
+        .attr('fill', (d) => scale_color(scale_des(d.population)))
         .on('mouseover', handleMouseOver)
         .on('mouseout', handleMouseOut)
     ;
@@ -96,7 +100,7 @@ function draw() {
 
     // zoom
     function zoomed() {
-        svg.selectAll('rect')
+        svg.selectAll('circle')
             .attr("transform", d3.event.transform);
         gX.call(axisX.scale(d3.event.transform.rescaleX(x)));
         gY.call(axisY.scale(d3.event.transform.rescaleY(y)));
